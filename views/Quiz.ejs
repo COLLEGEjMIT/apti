@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <title>Apti-Quizz</title>
+    
+    <link rel="stylesheet" href="/css/styles2.css"  type="text/css" />
+  </head>
+  <body>
+    
+      <div id="game">
+        <div class="container">
+          <div class="Time-Interval">
+            Time Left:<span></span>
+          </div>    
+          <% records.forEach(questions =>{%>
+             <h2   id="question">
+              QUES <%=current %>
+              <%= questions.question %>
+
+              </h2>
+        <form action="Quiz/<%= questions._id %>/<%= questions.correctanswer %>"method="POST">
+             <div class="form-check">
+              <input class="form-check-input" type="radio" name="choice" value="<%= questions.option1 %>" >
+              
+                <h4> <%= questions.option1 %></h4>
+           
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="choice" value="<%= questions.option2 %>">
+             
+                 <h4> <%= questions.option2 %></h4>
+           
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="choice" value="<%= questions.option3 %>">
+              
+                 <h4> <%= questions.option3 %></h4>
+           
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="choice" value="<%= questions.option4 %>">
+              
+                 <h4> <%= questions.option4 %></h4>
+           
+          </div>
+      <button type="submit" class="btn btn-success">Success</button>
+</form>
+<div class="pages">
+    <% if (pages > 0) { %>
+    <ul class="pagination text-center">
+        <% if (current == 1) { %>
+            <li class="disabled"><a>First</a></li>
+        <% } else { %>
+            <li><a href="/Quiz/1">First</a></li>
+        <% } %>
+        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+        <% if (i !== 1) { %>
+            <li class="disabled"><a>...</a></li>
+        <% } %>
+        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+            <% if (i == current) { %>
+                <li class="active"><a><%= i %></a></li>
+            <% } else { %>
+                <li><a href="/Quiz/<%= i %>"><%= i %></a></li>
+            <% } %>
+            <% if (i == Number(current) + 4 && i < pages) { %>
+                <li class="disabled"><a>...</a></li>
+            <% } %>
+        <% } %>
+        <% if (current == pages) { %>
+            <li class="disabled"><a>Last</a></li>
+        <% } else { %>
+
+            <li><a href="/Quiz/<%= pages %>">Last</a></li>
+        <% } %>
+        
+    </ul>
+<% } %>
+</div>
+<%})%>
+
+</div>
+</div>
+ </div>
+  </div>
+</script>
+  </body>
+</html>
